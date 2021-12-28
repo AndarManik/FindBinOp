@@ -18,7 +18,7 @@ I choose the value e as 0.04 to be when the BON is converged, and for all intent
 
 The motivation for this is to introduce a method for Bias Only Training.
 Bias Only Training is desireable because Backpropagation follows the same computations structure as Forward Pass.
-This would decrease the amount of computation needed because the weights no longer need to be updated and thus gradients dont need to be computed.
+This would decrease the amount of computation needed because the weights no longer need to be updated and thus gradients do not need to be computed.
 
 A networks with dimensions { N1, N2, N3, N4, ... } will have need to update N1x(N2+1) + N2x(N3+1) + N3x(N4+1)... parameter updates.
 whereas Bias Only Training will only need N1 + N2 + N3 + N4... parameter updates.
