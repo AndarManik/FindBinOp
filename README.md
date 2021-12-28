@@ -20,5 +20,5 @@ The motivation for this is to introduce a method for Bias Only Training.
 Bias Only Training is desireable because Backpropagation follows the same computations structure as Forward Pass.
 This would decrease the amount of computation needed because the weights no longer need to be updated and thus gradients do not need to be computed.
 
-A networks with dimensions { N1, N2, N3, N4, ... } will have need to update N1x(N2+1) + N2x(N3+1) + N3x(N4+1)... parameter updates.
+A network with dimensions { N1, N2, N3, N4, ... } will need N1x(N2+1) + N2x(N3+1) + N3x(N4+1)... parameter updates.
 whereas Bias Only Training will only need N1 + N2 + N3 + N4... parameter updates.
