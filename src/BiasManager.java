@@ -1,7 +1,6 @@
-import java.io.*;
+import java.io.PrintWriter;
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.List;
 
 /*
     BiasManager stores biases to be used in multi task settings.
@@ -55,7 +54,7 @@ public class BiasManager extends NeuralNetworkBias{
                     l.weight[i][j] -= l.grad[i][j] * rate;
     }
 
-    public List<double[]> getBiasPOINTER(int index) {
+    public ArrayList<double[]> getBiasPOINTER(int index) {
         return biases.get(index);
     }
 
