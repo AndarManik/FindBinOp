@@ -1,6 +1,4 @@
-import java.io.File;
-import java.io.FileWriter;
-import java.io.IOException;
+import java.io.*;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -47,7 +45,7 @@ public class BiasManager extends NeuralNetworkBias{
     public void setBias(int biasIndex)
     {
         currentIndex = biasIndex;
-        setBias((ArrayList<double[]>) biases.get(biasIndex));
+        setBias(biases.get(biasIndex));
     }
 
     public void updateBias(double rate) {
@@ -68,19 +66,17 @@ public class BiasManager extends NeuralNetworkBias{
                 d[i] = Math.random() - 0.5 ;
     }
 
-    public void saveNetwork(FileWriter file) throws IOException {
-        for(Layer l : network) {
+    public void saveNetwork(PrintWriter networkOut){
+        for(Layer l : network)
             for (double[] d : l.weight)
-                file.write(Arrays.toString(d) + "\n");
-        }
+                networkOut.println(Arrays.toString(d));
     }
 
-    public void saveBiases(FileWriter file) throws IOException {
-
+    public void saveBiases(PrintWriter BiasOut){
         for(ArrayList<double[]> bias : biases) {
             for (double[] d : bias)
-                file.write(Arrays.toString(d) + "  ");
-            file.write("\n");
+                BiasOut.print(Arrays.toString(d) + "  ");
+            BiasOut.println();
         }
     }
 }

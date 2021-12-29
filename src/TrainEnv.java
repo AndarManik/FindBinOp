@@ -1,6 +1,5 @@
-import java.io.File;
-import java.io.FileWriter;
-import java.io.IOException;
+import java.io.*;
+import java.util.ArrayList;
 import java.util.Scanner;
 
 public class TrainEnv {
@@ -8,46 +7,37 @@ public class TrainEnv {
     public static BiasManager nn = new BiasManager(new int[]{2, 3, 1}, 0.5, 16);
     public static Scanner sc = new Scanner(System.in);
     public static DoubleArrayList score = bom.getScoreList(nn);
-    public static void main(String[] args) throws IOException {
+
+    public static FileHandler fl = new FileHandler();
+
+    public static void main(String[] args){
         generateData();
     }
 
-    public static int generateData() throws IOException {
-        File networkFile = new File("C:\\Users\\Agi\\Documents\\FindBinOp\\out\\New folder\\network.txt");
-        networkFile.createNewFile();
-        FileWriter networkWriter = new FileWriter(networkFile.getAbsolutePath());
-
-        File biasFile = new File("C:\\Users\\Agi\\Documents\\FindBinOp\\out\\New folder\\biases.txt");
-        biasFile.createNewFile();
-        FileWriter biasWriter = new FileWriter(biasFile.getAbsolutePath());
-
-        int writeCount = 0;
-        for(int i = 0; i < 10000; i++) {
-            bom.train(nn, 6, 0.01);
+    public static int generateData(){
+        for(int i = 0; i < 1000000; i++) {
+            bom.train(nn, 5, 0.1);
             score = bom.getScoreList(nn);
-            double[] max = score.max();
-            if(max[1] < 0.04) {
-                networkWriter.write(writeCount + "\n");
-                biasWriter.write(writeCount + "\n");
-                writeCount++;
-
+            double e = score.max()[1];
+            if(e < 0.05) {
                 System.out.println("Write");
-                nn.saveNetwork(networkWriter);
-                nn.saveBiases(biasWriter);
+                nn.saveNetwork(fl.networkOut);
+                nn.saveBiases(fl.biasOut);
 
-                networkWriter.flush();
-                biasWriter.flush();
+                fl.networkOut.println();
+                fl.biasOut.println();
+                fl.networkOut.flush();
+                fl.biasOut.flush();
             }
             resetCommand();
         }
-
         return 1;
     }
 
     public static int trainMethod()
     {
         System.out.println("1: train, 2: score, 3: bias train, 4: randomize bias, 5: reset, 6: script");
-        switch(sc.nextInt()){
+        try { switch(sc.nextInt()){
             case 1: trainCommand();
                 break;
             case 2: scoreCommand();
@@ -59,6 +49,10 @@ public class TrainEnv {
             case 5: resetCommand();
                 break;
             case 6: script();
+        }}
+        catch(Exception e)
+        {
+            System.out.println("Oops");
         }
 
         return trainMethod();
@@ -77,13 +71,6 @@ public class TrainEnv {
     public static void resetCommand()
     {
         nn = new BiasManager(new int[]{2, 3, 1}, 0.5, 16);
-    }
-
-
-    public static void trainAbilityCommand(){
-            bom.randomizeBias(nn);
-            trainCommand();
-            scoreCommand();
     }
 
     public static void scoreCommand() {

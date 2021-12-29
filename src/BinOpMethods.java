@@ -4,7 +4,7 @@ public class BinOpMethods {
     public DoubleArrayList inputSpace = BinaryData.getInputSpace();
     public DoubleArrayList outputSpace = BinaryData.getOutputSpace();
 
-    public void train(BiasManager nn, int epocMag, double rate) {
+    public void train(BiasManager nn, double epocMag, double rate) {
         nn.clear();
         for(int epoc = 0; epoc < Math.pow(10, epocMag); epoc++){
             nn.setBias(epoc % 16);
