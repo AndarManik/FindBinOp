@@ -14,7 +14,7 @@ A member of F can be represented by its image, which takes form B^4, and can be 
 Because of this fact F has 16 different members which corresespond to different binary gates/operations.
 
 Because of the nature of Neural Networks I define the value of the largest error of a task as lower case e.
-I choose the value e as 0.04 to be when the BON is converged, and for all intents and purposes an outputs of >0.98 and <0.02 are 1 and 0 respectivly.
+I choose the value e as 0.05 to be when the BON is converged, and for all intents and purposes an outputs of >0.98 and <0.02 are 1 and 0 respectivly.
 
 The motivation for this is to introduce a method for Bias Only Training.
 Bias Only Training is desireable because Backpropagation follows the same computations structure as Forward Pass.
