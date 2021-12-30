@@ -1,10 +1,11 @@
 import java.util.ArrayList;
 
 public class BinOpMethods {
-    public DoubleArrayList inputSpace = BinaryData.getInputSpace();
-    public DoubleArrayList outputSpace = BinaryData.getOutputSpace();
+    public static VectorArray score;
+    public static VectorArray inputSpace = BinaryData.getInputSpace();
+    public static VectorArray outputSpace = BinaryData.getOutputSpace();
 
-    public void train(BiasManager nn, double epocMag, double rate) {
+    public static void train(BiasManager nn, double epocMag, double rate) {
         nn.clear();
         for(int epoc = 0; epoc < Math.pow(10, epocMag); epoc++){
             nn.setBias(epoc % 16);
@@ -15,9 +16,9 @@ public class BinOpMethods {
         }
     }
 
-    public DoubleArrayList getScoreList(BiasManager nn)
+    public static VectorArray getScoreList(BiasManager nn)
     {
-        DoubleArrayList scoreList = new DoubleArrayList();
+        VectorArray scoreList = new VectorArray();
         for(int epoc = 0; epoc < 16; epoc++)
         {
             nn.setBias(epoc);
@@ -31,14 +32,14 @@ public class BinOpMethods {
         return scoreList;
     }
 
-    public void randomizeBias(BiasManager nn) {
+    public static void randomizeBias(BiasManager nn) {
         for(ArrayList<double[]> b : nn.biases)
             for(double[] d : b)
                 for(int i = 0; i < d.length; i++)
                     d[i] = Math.random() - 0.5;
     }
 
-    public void trainBias(BiasManager nn, int epocMag, double rate) {
+    public static void trainBias(BiasManager nn, int epocMag, double rate) {
         nn.clear();
         double error = 0;
         for(int epoc = 0; epoc < Math.pow(10, epocMag); epoc++){
@@ -53,5 +54,10 @@ public class BinOpMethods {
                 error = 0;
             }
         }
+    }
+
+    public static double random()
+    {
+        return Math.random() - 0.5;
     }
 }

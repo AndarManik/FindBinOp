@@ -1,7 +1,7 @@
 public class BinaryData {
 
-    public static DoubleArrayList getInputSpace(){
-        DoubleArrayList inputSpace = new DoubleArrayList();
+    public static VectorArray getInputSpace(){
+        VectorArray inputSpace = new VectorArray();
 
         for(int i = 0; i < 2; i++)
             for(int j = 0; j < 2; j++)
@@ -10,8 +10,8 @@ public class BinaryData {
         return inputSpace;
     }
 
-    public static DoubleArrayList getOutputSpace(){
-        DoubleArrayList outputSpace = new DoubleArrayList();
+    public static VectorArray getOutputSpace(){
+        VectorArray outputSpace = new VectorArray();
 
         for(int i = 0; i < Math.pow(2,4); i++)
         {
